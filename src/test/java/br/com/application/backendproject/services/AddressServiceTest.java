@@ -56,7 +56,7 @@ public class AddressServiceTest {
     }
 
     @Test
-    public void listAllAddressesTest(){
+    public void shouldListAllAddressesTest(){
         List<Address> addresses = new ArrayList();
         addresses.add(address);
         
@@ -69,7 +69,7 @@ public class AddressServiceTest {
 
 
     @Test
-    public void findByIdTest() throws ServiceNotFoundException{
+    public void shouldFindByIdTest() throws ServiceNotFoundException{
         Address expectedAddress = address;
         Mockito.doReturn(Optional.of(expectedAddress)).when(addressRepository).findById(address.getId());
 
@@ -84,7 +84,7 @@ public class AddressServiceTest {
     }
 
     @Test
-    public void saveTest(){
+    public void shouldSaveTest(){
         Mockito.when(addressRepository.save(ArgumentMatchers.any(Address.class))).thenReturn(address);
         
         Address created = addressService.save(address);
@@ -93,7 +93,7 @@ public class AddressServiceTest {
     }
 
     @Test
-    public void deleteTestWhenExists(){     
+    public void shouldDeleteTestWhenExists(){     
         Mockito.when(addressRepository.findById(address.getId())).thenReturn(Optional.of(address));
         
         Address ActualAddress = addressService.findById(address.getId());

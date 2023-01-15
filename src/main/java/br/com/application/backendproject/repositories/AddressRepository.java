@@ -14,14 +14,14 @@ import jakarta.transaction.Transactional;
 public interface AddressRepository extends JpaRepository<Address, Long>{ 
     
     @Transactional
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query(
         value = "update address SET main_address = false WHERE id_person = ?1", 
         nativeQuery = true)
       Integer setAllOthersAddressAsNotMain(Long id);
 
     @Transactional
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query(
         value = "delete from address WHERE id_person = ?1", 
         nativeQuery = true)
@@ -29,7 +29,6 @@ public interface AddressRepository extends JpaRepository<Address, Long>{
 
 
     @Transactional
-    @Modifying
     @Query(
         value = "SELECT * FROM Address a where a.id_person = ?1", 
         nativeQuery = true)

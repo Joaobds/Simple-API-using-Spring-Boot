@@ -13,12 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import br.com.application.backendproject.Util.dataValidator;
 import br.com.application.backendproject.models.Person;
 import br.com.application.backendproject.repositories.AddressRepository;
 import br.com.application.backendproject.repositories.PersonRepository;
 import br.com.application.backendproject.services.exceptions.DatabaseException;
 import br.com.application.backendproject.services.exceptions.ResourceNotFoundException;
+import br.com.application.backendproject.utils.dataValidator;
 import ch.qos.logback.core.boolex.Matcher;
 
 @Service
@@ -42,8 +42,7 @@ public class PersonService {
 
     public Person save(Person person){ 
         try{
-            boolean valid = dataValidator.isDateValid(person.getBirthdate().toString());
-            person = personRepository.save(person);        
+            person = personRepository.save(person);      
             return person;
         } catch(DataIntegrityViolationException e){
             throw new DatabaseException(e, "Person");

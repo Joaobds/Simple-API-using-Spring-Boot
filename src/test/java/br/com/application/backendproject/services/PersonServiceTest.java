@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.verify;
 
+import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +16,6 @@ import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -25,15 +24,18 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+
 import br.com.application.backendproject.models.Person;
 import br.com.application.backendproject.repositories.AddressRepository;
 import br.com.application.backendproject.repositories.PersonRepository;
+import br.com.application.backendproject.services.utils.Util;
 
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 @WebAppConfiguration
 public class PersonServiceTest {
+
     @Mock
     PersonRepository personRepository;
 
@@ -49,19 +51,18 @@ public class PersonServiceTest {
     @BeforeEach
     public void setUp() throws ParseException{
         person = new Person();
-        java.util.Date birthDateInJava = new SimpleDateFormat("yyyy-MM-dd").parse("2003-05-30"); 
-        java.sql.Date birthDate = new java.sql.Date(birthDateInJava.getTime());
+        Date date = Util.convertJavaDateToSQLDate("2003-05-30");
         person.setId(1L);
         person.setName("João Gabriel Batista dos Santos");
-        person.setBirthdate(birthDate);
+        person.setBirthdate(date);
     }
 
 
     @Test
-    public void findByIdTest() throws ServiceNotFoundException{
+    public void shouldFindByIdTest() throws ServiceNotFoundException{
         Person expectedPerson = person;
         Mockito.doReturn(Optional.of(expectedPerson)).when(personRepository).findById(person.getId());
-
+        
         Person actualPerson = personService.findById(expectedPerson.getId());
         assertNotNull(actualPerson.getId());
         assertEquals(expectedPerson.getId(), actualPerson.getId());
@@ -73,7 +74,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void listAllPersonsTest(){
+    public void shouldListAllPersonsTest(){
         List<Person> persons = new ArrayList();
         persons.add(person);
         
@@ -85,7 +86,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void saveTest(){
+    public void shouldSaveTest(){
         Mockito.when(personRepository.save(ArgumentMatchers.any(Person.class))).thenReturn(person);
         
         Person created = personService.save(person);
@@ -94,7 +95,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void deleteTest(){     
+    public void shouldDeleteTest(){     
         Mockito.when(personRepository.findById(person.getId())).thenReturn(Optional.of(person));
         
         Person ActualPerson = personService.findById(person.getId());

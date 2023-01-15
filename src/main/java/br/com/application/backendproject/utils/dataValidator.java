@@ -1,4 +1,4 @@
-package br.com.application.backendproject.Util;
+package br.com.application.backendproject.utils;
 
 import java.text.DateFormat;
 import java.text.ParseException;
