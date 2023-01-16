@@ -1,13 +1,7 @@
 package br.com.application.backendproject.services;
 
-import java.lang.StackWalker.Option;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -18,8 +12,6 @@ import br.com.application.backendproject.repositories.AddressRepository;
 import br.com.application.backendproject.repositories.PersonRepository;
 import br.com.application.backendproject.services.exceptions.DatabaseException;
 import br.com.application.backendproject.services.exceptions.ResourceNotFoundException;
-import br.com.application.backendproject.utils.dataValidator;
-import ch.qos.logback.core.boolex.Matcher;
 
 @Service
 public class PersonService {

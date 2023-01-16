@@ -1,8 +1,6 @@
 package br.com.application.backendproject.repositories;
 
-import java.lang.StackWalker.Option;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

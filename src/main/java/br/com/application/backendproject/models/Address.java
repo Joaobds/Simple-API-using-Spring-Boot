@@ -2,9 +2,7 @@ package br.com.application.backendproject.models;
 
 import jakarta.persistence.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

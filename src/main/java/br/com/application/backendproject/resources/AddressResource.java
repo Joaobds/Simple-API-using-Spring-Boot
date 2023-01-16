@@ -1,6 +1,6 @@
 package br.com.application.backendproject.resources;
 
-import java.net.URI;
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +14,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 import br.com.application.backendproject.models.Address;
 import br.com.application.backendproject.services.AddressService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.tags.Tags;
+
+
 
 @RestController
 @RequestMapping(value = "persons/addresses") 
@@ -49,19 +46,16 @@ public class AddressResource {
 
     @Operation(summary = "Criar um endereço")
     @PostMapping
-    public ResponseEntity<Address> save(@RequestBody Address address){
-        address = addressService.save(address);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(address.getId()).toUri();
-        return ResponseEntity.created(uri).body(address); 
+    public ResponseEntity<Object> save(@RequestBody Address address) throws ParseException, JsonMappingException, JsonProcessingException{
+        ResponseEntity<Object> returnAddres = addressService.save(address);
+        return ResponseEntity.status(returnAddres.getStatusCode()).body(returnAddres);
     }
 
     
     @Operation(summary = "Editar um endereço")
     @PutMapping
     public ResponseEntity<Address> edit(@RequestBody Address address){
-        
         address = addressService.edit(address);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(address.getId()).toUri();
         return ResponseEntity.ok().body(address); 
     }
 

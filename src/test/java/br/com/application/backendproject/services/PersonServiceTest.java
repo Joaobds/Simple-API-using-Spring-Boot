@@ -16,7 +16,6 @@ import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -75,7 +74,7 @@ public class PersonServiceTest {
 
     @Test
     public void shouldListAllPersonsTest() throws ParseException{
-        List<Person> persons = new ArrayList();
+        List<Person> persons = new ArrayList<>();
         Person otherPerson = new Person();
         Date date = Util.convertJavaDateToSQLDate("2003-05-30");
         otherPerson.setName("Other Person");

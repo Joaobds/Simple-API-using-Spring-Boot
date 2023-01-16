@@ -21,7 +21,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 
 import br.com.application.backendproject.models.Address;
 import br.com.application.backendproject.repositories.AddressRepository;
@@ -57,7 +62,7 @@ public class AddressServiceTest {
 
     @Test
     public void shouldListAllAddressesTest(){
-        List<Address> addresses = new ArrayList();
+        List<Address> addresses = new ArrayList<>();
         addresses.add(address);
         
         Mockito.when(addressRepository.findAll()).thenReturn(addresses); 
@@ -84,12 +89,14 @@ public class AddressServiceTest {
     }
 
     @Test
-    public void shouldSaveTest(){
+    public void shouldSaveTest() throws ParseException, JsonMappingException, JsonProcessingException{
         Mockito.when(addressRepository.save(ArgumentMatchers.any(Address.class))).thenReturn(address);
         
-        Address created = addressService.save(address);
-        MatcherAssert.assertThat("NOT PASSED", created.getId().equals(address.getId()));
-        verify(addressRepository).save(created);
+        ResponseEntity<Object> returnedResponse = addressService.save(address);
+        assertEquals(org.springframework.http.HttpStatus.CREATED, returnedResponse.getStatusCode());
+       
+
+        
     }
 
     @Test

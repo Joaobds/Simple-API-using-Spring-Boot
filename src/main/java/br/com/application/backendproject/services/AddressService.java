@@ -1,23 +1,28 @@
 package br.com.application.backendproject.services;
 import java.util.Optional;
-
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 import br.com.application.backendproject.models.Address;
+import br.com.application.backendproject.models.ResponseHandler;
 import br.com.application.backendproject.repositories.AddressRepository;
 import br.com.application.backendproject.services.exceptions.DatabaseException;
 import br.com.application.backendproject.services.exceptions.ResourceNotFoundException;
+import br.com.application.backendproject.services.utils.AddressUtilities;
 
 @Service
 public class AddressService {
     
     @Autowired
     private AddressRepository addressRepository;
-
 
     public List<Address> listAllAddresses(){
         return addressRepository.findAll();  
@@ -28,13 +33,17 @@ public class AddressService {
         return address.orElseThrow(()->new ResourceNotFoundException("Address", id));
     }
 
-    public Address save(Address address){ 
+    public ResponseEntity<Object> save(Address address) throws ParseException, JsonMappingException, JsonProcessingException{ 
         try{
-            if(address.isMainAddress() && address.getIdPerson() > 0){
-                addressRepository.setAllOthersAddressAsNotMain(address.getIdPerson());
+            boolean isValidCep = AddressUtilities.cepValidator(address.getCep());
+            if(isValidCep){
+                if(address.isMainAddress() && address.getIdPerson() > 0){
+                    addressRepository.setAllOthersAddressAsNotMain(address.getIdPerson());
+                }
+                address = addressRepository.save(address);      
+                return ResponseHandler.generateResponse("Endereço adicionado com sucesso!", org.springframework.http.HttpStatus.CREATED, address);
             }
-            address = addressRepository.save(address);      
-            return address;        
+            return ResponseHandler.generateResponse("CEP INVÁLIDO", org.springframework.http.HttpStatus.BAD_REQUEST, null);
         } catch(DataIntegrityViolationException e){
             throw new DatabaseException(e, "Address");
         }      

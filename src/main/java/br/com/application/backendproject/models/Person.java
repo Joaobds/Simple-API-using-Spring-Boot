@@ -1,7 +1,6 @@
 package br.com.application.backendproject.models;
 
 import java.io.Serializable;
-import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
