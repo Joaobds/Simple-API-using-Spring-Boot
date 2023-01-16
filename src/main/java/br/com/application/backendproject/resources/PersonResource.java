@@ -19,6 +19,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.application.backendproject.models.Person;
 import br.com.application.backendproject.services.PersonService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tags;
 
 
 @RestController
@@ -27,20 +30,22 @@ public class PersonResource {
     @Autowired
     private PersonService personService;
     
-  
-
+    
+    @Operation(summary = "Buscar todas as pessoas")
     @GetMapping
     public ResponseEntity<List<Person>> listAll(){ 
         List<Person> persons = personService.listAllPersons(); 
         return ResponseEntity.ok().body(persons);     
     }
 
+    @Operation(summary = "Buscar pessoa pelo ID")
     @GetMapping(value = "/{id}") 
     public ResponseEntity<Person> findPerson(@PathVariable("id") Long id){
         Person person = personService.findById(id);
         return ResponseEntity.ok().body(person); 
     }    
 
+    @Operation(summary = "Criar uma pessoa")
     @PostMapping
     public ResponseEntity<Person> save(@RequestBody Person person){
             person = personService.save(person);
@@ -48,6 +53,7 @@ public class PersonResource {
             return ResponseEntity.created(uri).body(person); 
     }
 
+    @Operation(summary = "Editar uma pessoa")
     @PutMapping
     public ResponseEntity<Person> edit(@RequestBody Person person){
         person = personService.edit(person);
@@ -55,6 +61,7 @@ public class PersonResource {
         return ResponseEntity.created(uri).body(person);   
     }
 
+    @Operation(summary = "Deletar uma pessoa")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){ 
         personService.delete(id); 

@@ -74,24 +74,44 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void shouldListAllPersonsTest(){
+    public void shouldListAllPersonsTest() throws ParseException{
         List<Person> persons = new ArrayList();
-        persons.add(person);
+        Person otherPerson = new Person();
+        Date date = Util.convertJavaDateToSQLDate("2003-05-30");
+        otherPerson.setName("Other Person");
+        otherPerson.setBirthdate(date); 
         
+        persons.add(person);
+        persons.add(otherPerson);
+
         Mockito.when(personRepository.findAll()).thenReturn(persons);
         
         List<Person> expectedPersons = personService.listAllPersons();
         assertEquals(expectedPersons, persons);
+        assertEquals(persons.size(), 2);
+        assertEquals(expectedPersons.size(), 2);
+
+
         verify(personRepository).findAll();
     }
 
     @Test
-    public void shouldSaveTest(){
-        Mockito.when(personRepository.save(ArgumentMatchers.any(Person.class))).thenReturn(person);
+    public void shouldSaveTest() throws ParseException{
         
-        Person created = personService.save(person);
-        MatcherAssert.assertThat("NOT PASSED", created.getName().equals(person.getName()));
-        verify(personRepository).save(person);
+        Person firstCreatedPerson = new Person();
+        Date date = Util.convertJavaDateToSQLDate("2003-05-30");
+        firstCreatedPerson.setName("João Gabriel Batista dos Santos");
+        firstCreatedPerson.setBirthdate(date);
+        
+        Person secondSavedByServicePerson = new Person();
+        secondSavedByServicePerson.setName("Espelho");
+        secondSavedByServicePerson.setBirthdate(date);
+
+        firstCreatedPerson = personRepository.save(person);
+
+        secondSavedByServicePerson = personService.save(person);
+
+        assertEquals(firstCreatedPerson, secondSavedByServicePerson);
     }
 
     @Test
