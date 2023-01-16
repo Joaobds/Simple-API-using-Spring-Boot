@@ -8,7 +8,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
+
+@Setter
+@Getter
 @Entity
 @Table(name = "address")
 public class Address {
@@ -34,62 +39,6 @@ public class Address {
 
     @Column(nullable = false)
     private boolean mainAddress;
-    
-    public boolean isMainAddress() {
-        return mainAddress;
-    }
-
-    public void setMainAddress(boolean mainAddress) {
-        this.mainAddress = mainAddress;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public long getIdPerson() {
-        return idPerson;
-    }
-
-    public void setIdPerson(long idPerson) {
-        this.idPerson = idPerson;
-    }
 
     public Address(Long id, String street, String cep, String number, String city, long idPerson, boolean mainAddress) {
         this.id = id;

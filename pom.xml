@@ -17,7 +17,11 @@
 		<java.version>19</java.version>
 	</properties>
 	<dependencies>
-
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.24</version>
+		</dependency>
 		<dependency>
 			<groupId>com.arpnetworking.code.sbt-compiler-maven-plugin</groupId>
 			<artifactId>sbt-compilers</artifactId>
