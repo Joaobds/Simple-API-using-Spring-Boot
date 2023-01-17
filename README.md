@@ -1,3 +1,13 @@
+
+
+
+## :Durante a implementação de uma nova funcionalidade de software solicitada, quais critérios você avalia e implementa para garantia de qualidade de software?
+R: Primeiramente, um software precisa ser confiável para o usuário final. Bugs e erros não mapeados podem e vão ocorrer em qualquer aplicação madura, porém, esta situação não pode virar regra, o usuário não pode utilizar a aplicação com o sentimento de que a qualquer momento alguma operação dará errado. Essa aplicação também precisa seguir um padrão de UI/UX que permita uma usabilidade fluída e intuitiva.Por fim, manutenção. Esse fator é imprescindível para qualquer equipe que trabalha com esse software. Um código fonte que não é passível de manutenção condena a escalabilidade da aplicação. Eu alcançaria todos esses critérios através de uma boa documentação, um bom mapeamento dos comportamentos das classes, e um refactor constante dos componentes do projeto.
+
+## :Em qual etapa da implementação você considera a qualidade de software?
+R: Desde sua concepção conceitual. Pessoalmente, acredito que softwares são gerados a partir da necessidade de se resolver problemas encontrados no cotidiano. Se um recurso que vale um bom esforço é implementado sem analisar as causas que levaram a sua concepção, você estará executando com perfeição todas as etapas de um plano que não leva a lugar algum. Uma implementação que não tem motivo plausível para existir não tem qualidade.
+
+
 <h1 align="center">Começando a Utilizar</h1>
 
 ## :memo: Descrição
@@ -34,5 +44,7 @@ Esse projeto ilustra a estrutura da API gerada através da utilização do frame
 
 
 
-## :dart: Status do projeto
+
+Status do projeto
+## :dart: 
 Em andamento. 
