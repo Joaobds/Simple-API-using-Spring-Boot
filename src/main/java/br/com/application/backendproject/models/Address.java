@@ -2,11 +2,14 @@ package br.com.application.backendproject.models;
 
 import jakarta.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +22,7 @@ import lombok.Setter;
 public class Address {
 
     @Id
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Long id;
 

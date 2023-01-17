@@ -19,9 +19,19 @@ Esse projeto ilustra a estrutura da API gerada através da utilização do frame
 * Para rodar os testes, clique com o botão direito no projeto e logo após na opção "Run All Tests".
 * Caso você não tenha o JDK19 instalado, o IntelliJ recomendará automaticamente a instalação.
 * As rotas da API estão disponíveis em http://localhost:8080/swagger-ui/index.html
+* As configurações do banco estarão disponíveis no arquivo "aplication.properties"
+
 
 
 ## :books: Rodando no Ambiente Visual Studio Code
+* Para Utilizar este projeto através da IDE Visual Studio Code, primeiramente descompacte o projeto dentro do ambiente.
+* Vá na aba "Extensions" do VSCODE e instale a extensão "Spring boot Dashboard" para habilitar os comandos do spring, logo em seguida reinicie a IDE
+* Espere o projeto ser buildado pela IDE, assim que ele termina estará disponível no dashboard do spring a opção "Run"
+* Caso não possua o JDK19, baixe a versão através do link disponibilizado na seção "Tecnologias Utilizadas"
+* As rotas da API estão disponíveis em http://localhost:8080/swagger-ui/index.html
+* As configurações do banco estarão disponíveis no arquivo "aplication.properties"
+
+
 
 
 ## :dart: Status do projeto

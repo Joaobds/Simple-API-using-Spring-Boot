@@ -1,6 +1,7 @@
 package br.com.application.backendproject.resources;
 
 import java.net.URI;
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 import br.com.application.backendproject.models.Person;
 import br.com.application.backendproject.services.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,13 +30,13 @@ public class PersonResource {
     @Autowired
     private PersonService personService;
     
-    
     @Operation(summary = "Buscar todas as pessoas")
     @GetMapping
     public ResponseEntity<List<Person>> listAll(){ 
         List<Person> persons = personService.listAllPersons(); 
         return ResponseEntity.ok().body(persons);     
     }
+
 
     @Operation(summary = "Buscar pessoa pelo ID")
     @GetMapping(value = "/{id}") 
@@ -41,9 +45,10 @@ public class PersonResource {
         return ResponseEntity.ok().body(person); 
     }    
 
-    @Operation(summary = "Criar uma pessoa")
+
+    
     @PostMapping
-    public ResponseEntity<Person> save(@RequestBody Person person){
+    public ResponseEntity<Person> save(@RequestBody Person person ) throws JsonMappingException, JsonProcessingException, ParseException{
             person = personService.save(person);
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(person.getId()).toUri();
             return ResponseEntity.created(uri).body(person); 

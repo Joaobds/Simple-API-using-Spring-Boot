@@ -1,5 +1,6 @@
 package br.com.application.backendproject.services;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
+import br.com.application.backendproject.models.Address;
 import br.com.application.backendproject.models.Person;
 import br.com.application.backendproject.repositories.AddressRepository;
 import br.com.application.backendproject.repositories.PersonRepository;
@@ -32,9 +37,9 @@ public class PersonService {
         return person.orElseThrow(()->new ResourceNotFoundException("Person", id));
     }
 
-    public Person save(Person person){ 
+    public Person save(Person person) throws JsonMappingException, JsonProcessingException, ParseException{ 
         try{
-            person = personRepository.save(person);      
+            person = personRepository.save(person);
             return person;
         } catch(DataIntegrityViolationException e){
             throw new DatabaseException(e, "Person");

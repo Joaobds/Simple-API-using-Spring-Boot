@@ -23,6 +23,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 import br.com.application.backendproject.models.Person;
 import br.com.application.backendproject.repositories.AddressRepository;
@@ -95,7 +97,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void shouldSaveTest() throws ParseException{
+    public void shouldSaveTest() throws ParseException, JsonMappingException, JsonProcessingException{
         
         Person firstCreatedPerson = new Person();
         Date date = Util.convertJavaDateToSQLDate("2003-05-30");
