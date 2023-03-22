@@ -1,13 +1,12 @@
 package br.com.application.backendproject.repositories;
 
-import java.util.List;
-
+import br.com.application.backendproject.models.Address;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import br.com.application.backendproject.models.Address;
-import jakarta.transaction.Transactional;
+import java.util.List;
 
 public interface AddressRepository extends JpaRepository<Address, Long>{ 
     

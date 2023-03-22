@@ -1,17 +1,11 @@
 package br.com.application.backendproject.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.verify;
-
-import java.sql.Date;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import javax.management.ServiceNotFoundException;
-
+import br.com.application.backendproject.models.Person;
+import br.com.application.backendproject.repositories.AddressRepository;
+import br.com.application.backendproject.repositories.PersonRepository;
+import br.com.application.backendproject.services.utils.Util;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,13 +17,16 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import javax.management.ServiceNotFoundException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-import br.com.application.backendproject.models.Person;
-import br.com.application.backendproject.repositories.AddressRepository;
-import br.com.application.backendproject.repositories.PersonRepository;
-import br.com.application.backendproject.services.utils.Util;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.verify;
 
 
 @SpringBootTest

@@ -1,10 +1,10 @@
 package br.com.application.backendproject.resources.exceptions;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.time.Instant;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class StandardError implements Serializable { 
 	private static final long serialVersionUID = 1L;

@@ -1,10 +1,10 @@
 package br.com.application.backendproject.models;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ResponseHandler {
     

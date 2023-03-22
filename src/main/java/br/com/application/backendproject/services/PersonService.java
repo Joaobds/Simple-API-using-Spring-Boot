@@ -1,22 +1,19 @@
 package br.com.application.backendproject.services;
 
-import java.text.ParseException;
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-
-import br.com.application.backendproject.models.Address;
 import br.com.application.backendproject.models.Person;
 import br.com.application.backendproject.repositories.AddressRepository;
 import br.com.application.backendproject.repositories.PersonRepository;
 import br.com.application.backendproject.services.exceptions.DatabaseException;
 import br.com.application.backendproject.services.exceptions.ResourceNotFoundException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
+
+import java.text.ParseException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonService {

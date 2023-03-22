@@ -1,15 +1,4 @@
 package br.com.application.backendproject.services;
-import java.util.Optional;
-import java.text.ParseException;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 
 import br.com.application.backendproject.models.Address;
 import br.com.application.backendproject.models.ResponseHandler;
@@ -17,6 +6,16 @@ import br.com.application.backendproject.repositories.AddressRepository;
 import br.com.application.backendproject.services.exceptions.DatabaseException;
 import br.com.application.backendproject.services.exceptions.ResourceNotFoundException;
 import br.com.application.backendproject.services.utils.AddressUtilities;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import java.text.ParseException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AddressService {
@@ -37,8 +36,8 @@ public class AddressService {
         try{
             boolean isValidCep = AddressUtilities.cepValidator(address.getCep());
             if(isValidCep){
-                if(address.isMainAddress() && address.getIdPerson() > 0){
-                    addressRepository.setAllOthersAddressAsNotMain(address.getIdPerson());
+                if(address.isMainAddress() && address.getPerson().getId() > 0){
+                    addressRepository.setAllOthersAddressAsNotMain(address.getPerson().getId());
                 }
                 address = addressRepository.save(address);      
                 return ResponseHandler.generateResponse("Endereço adicionado com sucesso!", org.springframework.http.HttpStatus.CREATED, address);
@@ -49,25 +48,24 @@ public class AddressService {
         }      
     }
 
-    public Address edit(Address address){  
+    public Address edit(Address address){
         try{
-            if(address.isMainAddress() && address.getIdPerson() > 0){
-                addressRepository.setAllOthersAddressAsNotMain(address.getIdPerson());
+            if(address.isMainAddress() && address.getPerson().getId() > 0){
+                addressRepository.setAllOthersAddressAsNotMain(address.getPerson().getId());
             }
-            return addressRepository.save(address);         
+            return addressRepository.save(address);
         } catch(DataIntegrityViolationException e){
             throw new DatabaseException(e, "Address");
-        }    
+        }
     }
 
-    public void delete(Long id){ 
+    public void delete(Long id){
         try{
-            addressRepository.deleteById(id);    
+            addressRepository.deleteById(id);
         } catch(DataIntegrityViolationException e){
             throw new DatabaseException(e, "Address");
-        }           
+        }
     }
-
     public List<Address> findPersonAddresses(Long id){
         return addressRepository.findPersonAddresses(id);   
     }
